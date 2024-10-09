@@ -1,0 +1,5 @@
+.env
+/myvenv
+/eridosolutions/__pycache__
+/django_apps/__pycache__
+/eridoenv

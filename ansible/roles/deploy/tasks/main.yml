@@ -1,0 +1,31 @@
+- name: Ensure the project directory exists
+  file:
+    path: /root/skinsoko_project
+    state: directory
+
+- name: Pull the latest code from the repository
+  git:
+    repo: 'git@github.com:Bot-on-Tapwater/erido_backend.git'
+    dest: '/home/deploy/'
+    version: 'master'
+    force: yes
+
+# - name: Install Python dependencies
+#   pip:
+#     requirements: /root/skinsoko_project/requirements.txt
+#     virtualenv: /root/skinsoko_project/myvenv
+
+# - name: Apply database migrations
+#   command: source /root/skinsoko_project/myvenv/bin/activate && python manage.py migrate
+#   args:
+#     chdir: /root/skinsoko_project
+
+# - name: Collect static files
+#   command: source /root/skinsoko_project/myvenv/bin/activate && python manage.py collectstatic --noinput
+#   args:
+#     chdir: /root/skinsoko_project
+
+# - name: Restart skinsoko service
+#   systemd:
+#     name: skinsoko
+#     state: restarted
