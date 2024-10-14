@@ -3,3 +3,7 @@
 /eridosolutions/__pycache__
 /django_apps/__pycache__
 /eridoenv
+/erido/__pycache__/
+media/
+staticfiles/
+/erido/migrations/
