@@ -117,11 +117,15 @@ class Product(models.Model):
             'quantity_in_stock': self.quantity_in_stock,
             # 'subcategories': [subcategory.to_dict() for subcategory in self.subcategories.all()],
             'best_seller': self.best_seller,
+            'image1': self.image1.url if self.image1 else None,  # Convert to URL
+            'image2': self.image2.url if self.image2 else None,  # Convert to URL
+            'image3': self.image3.url if self.image3 else None,  # Convert to URL
+            'image4': self.image4.url if self.image4 else None,  # Convert to URL
             'slug': self.slug,
-            'image1': self.image1,
-            'image2': self.image2,
-            'image3': self.image3,
-            'image4': self.image4,
+            #'image1': self.image1,
+            #'image2': self.image2,
+            #'image3': self.image3,
+            #'image4': self.image4,
             'brand': self.brand.name
         }
     
