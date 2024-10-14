@@ -196,7 +196,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # CSRF_USE_SESSIONS = True
 
-CSRF_TRUSTED_ORIGINS = ['https://erido-site.vercel.app/', 'http://shop.skinsoko.com', 'https://skinsoko.com', 'http://skinsoko.com', 'http://localhost:3000', 'https://localhost:3000']
+CSRF_TRUSTED_ORIGINS = ['https://erido-site.vercel.app', 'http://shop.skinsoko.com', 'https://skinsoko.com', 'http://skinsoko.com', 'http://localhost:3000', 'https://localhost:3000']
 
 # CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
 # LOGIN_REDIRECT_URL = ''
