@@ -21,11 +21,17 @@ jobs:
         eval $(ssh-agent -s)
         ssh-add ~/.ssh/id_rsa
 
-    # - name: Set up Ansible
-    #   run: |
-    #     sudo apt update
-    #     sudo apt install -y ansible
-
-    - name: Run Ansible playbook
+    - name: Add VPS host to known hosts
       run: |
-        ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ansible/hosts ansible/deploy.yml -vvvv
+        ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Deploy to VPS via SSH
+      run: |
+        ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+        if [ -d "/home/${{ secrets.VPS_USER }}/erido_backend" ]; then
+          cd /home/${{ secrets.VPS_USER }}/erido_backend
+          git pull origin master
+        else
+          echo "Repository not found in /home/${{ secrets.VPS_USER }}/erido_backend"
+        fi
+        EOF
