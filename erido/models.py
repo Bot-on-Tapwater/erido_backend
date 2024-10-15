@@ -172,7 +172,7 @@ class CartItem(models.Model):
 
         return {
             'product_id': self.product.product_id if self.product else None,
-            'product_image': self.product.image if self.product else None,
+            'product_image': self.product.image1.url if self.product else None,
             # 'cart': self.cart.to_dict() if self.cart else None,
             'product_slug': self.product.slug if self.product else None,
             'product_name': self.product.name if self.product else None,
