@@ -1033,11 +1033,13 @@ def get_contents_of_shopping_cart_of_user(request):
     view_url = request.build_absolute_uri()
     
     id = request.session.get('user_id')
-    session_key = request.session.session_key    
+    session_key = request.session.session_key
 
     if not session_key:
         request.session.create()
         session_key = request.session.session_key
+
+    print(id, session_key)
 
     try:
         if id:
@@ -1046,6 +1048,10 @@ def get_contents_of_shopping_cart_of_user(request):
             cart_contents_of_user = ShoppingCart.objects.get(session_key=session_key)
         
         cart_items = [item.to_dict() for item in CartItem.objects.filter(cart=cart_contents_of_user.cart_id)]
+
+        print(cart_contents_of_user.to_dict())
+
+        print(cart_items)
 
         # dict to hold user's cart summary
         cart_summary = {
@@ -1065,10 +1071,12 @@ def get_contents_of_shopping_cart_of_user(request):
         return JsonResponse({"cart_summary": cart_summary, "cart_items": cart_items})
 
     except ShoppingCart.DoesNotExist:
-        return JsonResponse(None, safe=False)
+        # return JsonResponse(None, safe=False)
+        return JsonResponse({'error': "shopping cart does not exist"})
     
-    except TypeError:
-        return JsonResponse(None, safe=False)
+    # except TypeError as e:
+        # return JsonResponse(None, safe=False)
+        # return JsonResponse({'error': str(e)})
 
 @require_http_methods(["POST"])
 # # @csrf_exempt # !!!SECURITY RISK!!! COMMENT OUT CODE
@@ -1509,7 +1517,7 @@ def search(request):
         search_results = Product.objects.filter(
             Q(name__icontains=query) |
             Q(description__icontains=query) |
-            Q(ingredients__icontains=query) |
+            # Q(ingredients__icontains=query) |
             Q(brand__name__icontains=query) |
             Q(subcategories__name__icontains=query) |
             Q(subcategories__main_category__name__icontains=query)
