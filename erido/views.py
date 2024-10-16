@@ -1039,7 +1039,7 @@ def get_contents_of_shopping_cart_of_user(request):
         request.session.create()
         session_key = request.session.session_key
 
-    print(id, session_key)
+    # print(id, session_key)
 
     try:
         if id:
